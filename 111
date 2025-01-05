@@ -1,0 +1,37 @@
+package main
+
+import (
+	"fmt"
+)
+
+type Node struct {
+	N    int
+	Next *Node
+}
+
+
+func findMiddle(head *Node) int {
+	slow := head
+	fast := head.Next
+	for fast != nil && fast.Next != nil {
+
+	}
+	return
+
+
+func main(){
+n := Node{
+		N: 1,
+		Next: &Node{
+			N: 2,
+			Next: &Node{
+				N: 3,
+				Next: &Node{
+					N:    4,
+					Next: nil,
+				},
+			},
+		},
+	}
+	findMiddle(&n)
+}
