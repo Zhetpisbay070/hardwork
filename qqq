@@ -2,6 +2,9 @@ package main
 
 import "fmt"
 
+type Queue struct {
+	s []any
+}
 func (q *Queue) Push(v any) {
 	q.s = append(q.s, v)
 }
