@@ -1,0 +1,32 @@
+package main
+
+import "fmt"
+
+func (q *Queue) Push(v any) {
+	q.s = append(q.s, v)
+}
+
+func (q *Queue) Pop() (any, bool) {
+	if len(q.s) == 0 {
+
+		return nil, false
+	}
+	res := q.s[0]
+
+	q.s = q.s[1:]
+
+	return res, true
+}
+
+func main() {
+	s := Queue{}
+
+	s.Push(1)
+	s.Push(2)
+	s.Push(3)
+
+	fmt.Println(s.Pop())
+	fmt.Println(s.Pop())
+	fmt.Println(s.Pop())
+	fmt.Println(s.Pop())
+}
