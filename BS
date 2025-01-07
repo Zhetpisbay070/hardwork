@@ -1,0 +1,41 @@
+package main
+
+import "fmt"
+
+type Node struct {
+	N     int
+	Left  *Node
+	Right *Node
+}
+
+func BS(arr []int, n int) bool {
+
+	left := 0
+	right := len(arr) - 1
+	for left <= right {
+		mid := (left + right) / 2
+
+		if arr[mid] == n {
+			return true
+		}
+
+		if arr[mid] > n {
+			right = mid - 1
+		}
+
+		if arr[mid] < n {
+			left = mid + 1
+		}
+
+		if left > right {
+			return false
+		}
+	}
+	return true
+}
+func main() {
+	fmt.Println(BS([]int{1, 3, 5, 7, 9, 11, 13}, 9))
+	fmt.Println(BS([]int{1, 3, 5, 7, 9, 11, 13}, 2))
+	fmt.Println(BS([]int{1, 3, 5, 7, 9, 11, 13}, 22))
+
+}
