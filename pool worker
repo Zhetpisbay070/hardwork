@@ -1,0 +1,42 @@
+package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+func square(wg *sync.WaitGroup, jobs <-chan int, results chan<- int) {
+	for jobs := range jobs {
+		results <- jobs * jobs
+	}
+
+	wg.Done()
+}
+
+func main() {
+	var wg sync.WaitGroup
+
+	jobs := make(chan int, 10)
+	results := make(chan int, 10)
+
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go square(&wg, jobs, results)
+	}
+
+	for i := 0; i < 10; i++ {
+		jobs <- i
+	}
+
+	close(jobs)
+
+	wg.Wait()
+
+	close(results)
+
+	for i := 0; i < 10; i++ {
+		result := <-results
+		fmt.Println(i, result)
+	}
+
+}
